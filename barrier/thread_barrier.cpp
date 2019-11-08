@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 
-#include <boost/assert.hpp>
+//#include <boost/assert.hpp>
 
 #include <boost/fiber/all.hpp>
 
@@ -11,7 +11,7 @@ int value1 = 0;
 int value2 = 0;
 
 inline
-void fn1( boost::fibers::barrier & b)
+void fn1( boost::fibers::barrier& b )
 {
   boost::fibers::fiber::id id = boost::this_fiber::get_id();
   std::cout << "fiber " << id << ": fn1 entered" << std::endl;
@@ -40,7 +40,7 @@ void fn1( boost::fibers::barrier & b)
 }
 
 inline
-void fn2( boost::fibers::barrier & b)
+void fn2( boost::fibers::barrier& b )
 {
   boost::fibers::fiber::id id = boost::this_fiber::get_id();
   std::cout << "fiber " << id << ": fn2 entered" << std::endl;
@@ -70,12 +70,11 @@ void fn2( boost::fibers::barrier & b)
 
 int main()
 {
-  try
-  {
-    boost::fibers::barrier fb( 2);
+  try {
+    boost::fibers::barrier fb(2);
 
-    boost::fibers::fiber f1( & fn1, std::ref( fb) );
-    boost::fibers::fiber f2( & fn2, std::ref( fb) );
+    boost::fibers::fiber f1(&fn1, std::ref(fb));
+    boost::fibers::fiber f2(&fn2, std::ref(fb));
 
     f1.join();
     f2.join();
@@ -84,10 +83,8 @@ int main()
 
     return EXIT_SUCCESS;
   }
-  catch ( std::exception const& e)
-  { std::cerr << "exception: " << e.what() << std::endl; }
-  catch (...)
-  { std::cerr << "unhandled exception" << std::endl; }
+  catch( std::exception const& e ) { std::cerr << "exception: " << e.what() << std::endl; }
+  catch( ... ) { std::cerr << "unhandled exception" << std::endl; }
   return EXIT_FAILURE;
 }
 

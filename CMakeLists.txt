@@ -25,13 +25,13 @@ message(Boost_LIBRARIES = ${Boost_LIBRARIES})
 
 message(STATUS "Boost version: ${Boost_VERSION}")
 
-add_executable(work_sharing work_sharing/work_sharing.cpp ../barrier.hpp)
+add_executable(work_sharing work_sharing/work_sharing.cpp ../thread_barrier.hpp)
 target_link_libraries(work_sharing ${Boost_LIBRARIES})
 
 add_executable(adapt_callbacks adapt_callbacks/adapt_callbacks.cpp)
 target_link_libraries(adapt_callbacks ${Boost_LIBRARIES})
 
-add_executable(barrier barrier/barrier.cpp)
+add_executable(barrier barrier/thread_barrier.cpp)
 target_link_libraries(barrier ${Boost_LIBRARIES})
 
 add_executable(adapt_nonblocking adapt_nonblocking/adapt_nonblocking.cpp)
@@ -58,7 +58,7 @@ target_link_libraries(segmented_stack ${Boost_LIBRARIES})
 add_executable(adapt_method_calls adapt_method_calls/adapt_method_calls.cpp)
 target_link_libraries(adapt_method_calls ${Boost_LIBRARIES})
 
-add_executable(work_stealing work_stealing/work_stealing.cpp ../barrier.hpp)
+add_executable(work_stealing work_stealing/work_stealing.cpp ../thread_barrier.hpp)
 target_link_libraries(work_stealing ${Boost_LIBRARIES})
 
 add_executable(join join/join.cpp)

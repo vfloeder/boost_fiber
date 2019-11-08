@@ -12,8 +12,7 @@ int value2 = 0;
 void fn1()
 {
   boost::fibers::fiber::id id = boost::this_fiber::get_id();
-  for ( int i = 0; i < 5; ++i)
-  {
+  for( int                 i  = 0; i < 5; ++i ) {
     ++value1;
     std::cout << "fiber " << id << " fn1: increment value1: " << value1 << std::endl;
     boost::this_fiber::yield();
@@ -21,19 +20,18 @@ void fn1()
   std::cout << "fiber " << id << " fn1: returns" << std::endl;
 }
 
-void fn2( boost::fibers::fiber & f)
+void fn2( boost::fibers::fiber& f )
 {
   boost::fibers::fiber::id id = boost::this_fiber::get_id();
-  for ( int i = 0; i < 5; ++i)
-  {
+
+  for( int                 i  = 0; i < 5; ++i ) {
     ++value2;
     std::cout << "fiber " << id << " fn2: increment value2: " << value2 << std::endl;
-    if ( i == 1)
-    {
-      boost::fibers::fiber::id id = f.get_id();
-      std::cout << "fiber " << id << " fn2: joins fiber " << id << std::endl;
+    if( i == 1 ) {
+      boost::fibers::fiber::id id1 = f.get_id();
+      std::cout << "fiber " << id << " fn2: joins fiber " << id1 << std::endl;
       f.join();
-      std::cout << "fiber " << id << " fn2: joined fiber " << id << std::endl;
+      std::cout << "fiber " << id << " fn2: joined fiber " << id1 << std::endl;
     }
     boost::this_fiber::yield();
   }
@@ -42,10 +40,9 @@ void fn2( boost::fibers::fiber & f)
 
 int main()
 {
-  try
-  {
-    boost::fibers::fiber f1( fn1);
-    boost::fibers::fiber f2( fn2, std::ref( f1) );
+  try {
+    boost::fibers::fiber f1(fn1);
+    boost::fibers::fiber f2(fn2, std::ref(f1));
 
     f2.join();
 
@@ -53,9 +50,7 @@ int main()
 
     return EXIT_SUCCESS;
   }
-  catch ( std::exception const& e)
-  { std::cerr << "exception: " << e.what() << std::endl; }
-  catch (...)
-  { std::cerr << "unhandled exception" << std::endl; }
+  catch( std::exception const& e ) { std::cerr << "exception: " << e.what() << std::endl; }
+  catch( ... ) { std::cerr << "unhandled exception" << std::endl; }
   return EXIT_FAILURE;
 }
