@@ -5,12 +5,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 # #################################################################################################
 
+find_package(Boost REQUIRED COMPONENTS fiber)
 
-  find_package(Boost REQUIRED COMPONENTS fiber)
+add_library(boost::fiber INTERFACE IMPORTED)
 
-  add_library(boost::fiber INTERFACE IMPORTED)
-
-  set_target_properties(boost::fiber PROPERTIES
+set_target_properties(boost::fiber PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES   "${Boost_INCLUDE_DIRS}"
     INTERFACE_LINK_LIBRARIES        "${Boost_FIBER_LIBRARIES}"
     )
