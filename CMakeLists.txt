@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(boost_fiber_1)
+project(boost_fiber)
 
 set(CMAKE_CXX_STANDARD 17)
 
