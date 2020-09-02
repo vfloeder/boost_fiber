@@ -1,0 +1,9 @@
+[requires]
+boost/1.67.0@conan/stable
+
+[generators]
+cmake
+
+[imports]
+bin, *.dll -> ./bin
+lib, *.dylib* -> ./bin
